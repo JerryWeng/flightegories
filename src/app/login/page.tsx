@@ -3,8 +3,6 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
-import styles from "./page.module.css";
-import Logo from "../images/logo.svg";
 
 const Login = () => {
   const [error, setError] = useState("");
@@ -43,9 +41,6 @@ const Login = () => {
 
   return (
     <div>
-      <Link href="/">
-        <Logo />
-      </Link>
       <div>
         <h1>Login</h1>
         <form onSubmit={handleSubmit}>

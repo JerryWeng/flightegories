@@ -16,7 +16,7 @@ export const POST = async (request: any) => {
 
     try {
         const response = await sql`
-            INSERT INTO users VALUES (DEFAULT, ${username}, ${hashedPassword}, ${firstName}, ${lastName});`;
+            INSERT INTO users VALUES (DEFAULT, ${firstName}, ${lastName}, ${username}, ${hashedPassword});`;
         return new NextResponse("User is registered", { status: 200 });
     } catch (err: any) {
         return new NextResponse(err, {
