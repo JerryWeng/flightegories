@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
+import styles from "./login.module.css"
 
 const Login = () => {
   const [error, setError] = useState("");
@@ -40,25 +41,30 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <div>
-        <h1>Login</h1>
-        <form onSubmit={handleSubmit}>
+    <div className={styles.main}>
+      {/* <Link href="/">
+        <Logo className = {styles.logo}/>
+      </Link> */}
+      <div className={styles.container}>
+        <h1 className={styles.title}>Login</h1>
+        <form className={styles.form} onSubmit={handleSubmit}>
           <input
+            className={styles.input}
             type="text"
             placeholder="Username"
             required
           />
           <input
+            className={styles.input}
             type="password"
             placeholder="Password"
             required
           />
-          <button type="submit">
+          <button className={styles.button} type="submit">
             Login
           </button>
           <p>{error && error}</p>
-          <Link href="/register">
+          <Link className={styles.link} href="/register">
             Don't have an account?
           </Link>
         </form>
