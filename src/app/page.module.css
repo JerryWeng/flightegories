@@ -2,12 +2,39 @@
   /* background: linear-gradient(-45deg, #000 49.5%, transparent 49.5%, transparent 50.5%, #ffffff),
   url('../public/images/loginBackground.jpeg') center/cover; */
   background-color: #000;
-  height: 70vh;
+  height: 55vh;
   display: flex;
   position: relative;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.block {
+  height: 70px;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: transparent;
+  padding: 10px 30px;
+  transition: background-color 0.3s ease;
+  z-index: 1000;
+}
+
+.navbar.scrolled {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.navbarStart {
+  height: 50px;
+  width: 50px;
 }
 
 .logo {
@@ -83,6 +110,26 @@
 
 .cardText {
   white-space: nowrap;
+}
+
+.reserve {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  max-width: 60%;
+  margin: 0 auto 0 50px;
+}
+
+.reserveContent {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 80px 40px;
+}
+
+.reserveContent h1 {
+  font-size: 4em;
+  margin-bottom: 20px;
 }
 
 .reserveLink {

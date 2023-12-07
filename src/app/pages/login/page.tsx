@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import Logo from "../../public/images/logo.png"
+import Logo from "../../../public/images/logo.png"
 import { useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
 import styles from "./login.module.css"
@@ -65,7 +65,7 @@ const Login = () => {
             Login
           </button>
           <p>{error && error}</p>
-          <Link className={styles.link} href="/register">
+          <Link className={styles.link} href="/pages/register">
             Don't have an account?
           </Link>
         </form>

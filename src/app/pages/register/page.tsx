@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
 import Link from "next/link";
-import Logo from "../../public/images/logo.png";
+import Logo from "../../../public/images/logo.png";
 import styles from "./register.module.css";
 
 const Register = () => {
@@ -31,7 +31,7 @@ const Register = () => {
     }
 
     try {
-      const res = await fetch("/api/auth/register", {
+      const res = await fetch("../api/auth/register", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
