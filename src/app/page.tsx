@@ -19,13 +19,13 @@ export default function Home() {
             </h2>
           </Link>
 
-          <button className={styles.card}>
-            Logout
-          </button>
+          <button className={styles.card}>Logout</button>
         </div>
       </div>
-      <div>
-        <button> Reserve Flights</button>
+      <div className={styles.reserve}>
+        <a href="http://" target="_blank" rel="noopener noreferrer" className={styles.reserveLink}>
+          Reserve Flights
+        </a>
       </div>
     </main>
   );

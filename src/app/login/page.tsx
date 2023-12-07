@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import Logo from "../../public/images/logo.png"
 import { useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
 import styles from "./login.module.css"
@@ -42,10 +43,10 @@ const Login = () => {
 
   return (
     <div className={styles.main}>
-      {/* <Link href="/">
-        <Logo className = {styles.logo}/>
-      </Link> */}
       <div className={styles.container}>
+        <Link href="/">
+          <img src={Logo.src} className={styles.logo} />
+        </Link>
         <h1 className={styles.title}>Login</h1>
         <form className={styles.form} onSubmit={handleSubmit}>
           <input
