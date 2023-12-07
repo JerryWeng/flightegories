@@ -1,4 +1,5 @@
 
+//FLIGHT TABLE SCRIPT
 
 INSERT INTO flights (flightNo, departure_time, arrival_time, departure_airport, arrival_airport, airline)
 VALUES
@@ -197,6 +198,76 @@ VALUES
   ('UX3122', '2023-12-07T10:55:00+00:00', '2023-12-07T11:55:00+00:00', 'Guglielmo Marconi', 'Leonardo Da Vinci (Fiumicino)', 'Air Europa', 'scheduled'),
   ('TP7130', '2023-12-07T10:55:00+00:00', '2023-12-07T11:55:00+00:00', 'Guglielmo Marconi', 'Leonardo Da Vinci (Fiumicino)', 'TAP Air Portugal', 'scheduled'),
   ('RJ3554', '2023-12-07T10:55:00+00:00', '2023-12-07T11:55:00+00:00', 'Guglielmo Marconi', 'Leonardo Da Vinci (Fiumicino)', 'Royal Jordanian', 'scheduled');
+
+
+  //FARE TABLE SCRIPT
+
+
+  DO $$
+DECLARE
+    flightNumbers TEXT[] := ARRAY[
+    'QF8179', 'UA6532', 'EK2216', 'AC7549', 'EK2334', 'MS912', 'SQ6034', 'EK958', 'QF8958', 'GF506',
+    'AY5902', 'AA7141', 'BA416', 'BA408', 'EI151', 'IB1583', 'LA8911', 'BA4603', 'QR5980', 'KQ4091',
+    'NPT5629', 'FDX4038', 'VN3242', 'MU1547', 'MK9090', 'MS799', 'AC2903', 'AM6074', 'AF7301', 'MK9081',
+    'KL1927', 'AF1795', 'PC1252', 'KL1185', 'CX2038', 'U27954', 'KL918', 'DL9406', 'KQ1330', 'EY7309',
+    'SQ8382', 'SQ8322', 'SQ8344', 'BA15', 'SQ522', '3K676', 'AF9587', 'KL4873', 'AY6378', 'EK7752',
+    'WY6320', 'SQ6220', 'SK3494', 'JU8041', 'TK525', 'MS737', 'TK4627', 'KL1613', 'TK1322', 'SQ6326',
+    'OM5302', 'DL7680', 'KE461', 'VN3409', 'DL7678', 'TG6392', 'OZ6872', 'NZ4922', 'KJ3116', 'KE552',
+    'OU5462', 'AC9119', 'LH9528', '4Y2', 'CX6709', 'SK9421', 'LH1087', 'TP7783', 'TG7671', 'CA6072',
+    'WY6128', 'WB1511', 'WY6175', 'LA6040', 'JU8366', 'VA6105', 'AA8710', 'VY5334', 'AA8615', 'HRN127',
+    'KL1700', 'MS753', 'TP7008', 'KL1701', 'IB3945', 'CC398', 'ZH9092', 'CX6248', 'HB320', 'CX777',
+    'HX608', 'QR5834', 'LX9510', 'LH7010', 'BA4566', 'TK8006', 'TK4445', 'TG5687', 'MH4915', 'KL3750',
+    'VJ321', 'NH805', 'VJ211', 'VN607', 'AY6260', 'WB1503', 'BA2306', 'WY6015', 'U26419', 'BA2541',
+    'W65730', 'GQ700', 'W65768', 'EI236', 'CI150', 'KL4998', 'JL5114', 'ZH3402', 'MH4083', 'TG6275',
+    'SQ5809', 'JX841', 'CI195', 'JX746', 'CV6374', 'B66595', 'AV569', 'AA655', 'AA95', 'AZ608', 'FX1483',
+    'SN501', 'AZ3396', 'DL195', 'W61478', 'U27131', 'TP1031', 'FR2922', 'U27192', 'QR3744', 'IB5328',
+    'KL3352', 'EY4345', 'VY8721', 'BA4463', 'EI8363', 'FR7044', 'IB3793', 'FR113', 'EI231', 'BAW5901',
+    'AA8055', 'LW7366', 'UL2446', 'TK4856', 'QR5029', 'PR3610', 'AK393', 'CZ365', 'ID6018', 'MH783',
+    'TG417', 'K63681', 'UA9189', 'LH4456', 'CA6454', 'LH9468', 'OU5360', 'UA9037', 'DWW737', 'UA9499',
+    'KL1793', 'LH9469', 'EY2844', 'ET4043', 'DL6676', 'CZ7349', 'AR7180', 'AZ107', 'AZ1314', 'UX3122',
+    'TP7130', 'RJ3554'
+];
+
+    fareCodes TEXT[] := ARRAY['Yclass', 'Bclass', 'So', 'SR', 'MIL'];
+    i INT;
+BEGIN
+    FOR i IN 1..array_length(flightNumbers, 1) LOOP
+        INSERT INTO fares (flightNo, fareCode, fareAmount)
+        VALUES (
+            flightNumbers[i],
+            fareCodes[1], -- Yclass
+            floor(random() * 300) + 400
+        );
+
+        INSERT INTO fares (flightNo, fareCode, fareAmount)
+        VALUES (
+            flightNumbers[i],
+            fareCodes[2], -- Bclass
+            floor(random() * 700) + 800
+        );
+
+        INSERT INTO fares (flightNo, fareCode, fareAmount)
+        VALUES (
+            flightNumbers[i],
+            fareCodes[3], -- So
+            0 -- Setting Sold Out fare to 0
+        );
+
+        INSERT INTO fares (flightNo, fareCode, fareAmount)
+        VALUES (
+            flightNumbers[i],
+            fareCodes[4], -- SR
+            floor(random() * 100) + 200
+        );
+
+        INSERT INTO fares (flightNo, fareCode, fareAmount)
+        VALUES (
+            flightNumbers[i],
+            fareCodes[5], -- MIL
+            floor(random() * 200) + 300
+        );
+    END LOOP;
+END$$;
 
 
   
