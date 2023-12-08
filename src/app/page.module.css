@@ -45,6 +45,20 @@
   height: 50px;
 }
 
+.logOut {
+  color: white;
+  background-color: transparent;
+  font-size: 1.2em;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.logOut.scrolled {
+  color: black;
+}
+
 .about {
   display: flex;
   justify-content: space-between;
@@ -87,6 +101,11 @@
 .card {
   color: white;
   margin-top: 10px;
+  transition: color 0.3s ease
+}
+
+.card.scrolled {
+  color: black;
 }
 
 .cardLink {

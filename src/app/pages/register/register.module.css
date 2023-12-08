@@ -1,93 +1,123 @@
 .main {
-    background-image: url(../../../public/images/registerBackground.jpeg);
-    background-size: cover;
-    background-position: center;
-    position: relative;
-  }
+  background-image: url(../../../public/images/registerBackground.jpeg);
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
 
-  .logo {
-    position: absolute;
-    top: 5px;
-    left: 15px;
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
-  }
-  
-  .container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-left: auto;
-    background-color: #ffffff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 40px;
-    min-height: 100vh;
-    max-width: 350px;
-    width: 100%;
-  }
-  
-  .title {
-    color: #476e89;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .input {
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid #476e89;
-    border-radius: 8px;
-    font-size: 16px;
-  }
-  
-  .input::placeholder {
-    color: #aaa;
-  }
-  
-  .button {
-    padding: 15px;
-    background-color: #476e89;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .button:hover {
-    background-color: #3a5d76;
-  }
+.back {
+  display: inline-block;
+  position: fixed;
+  color: white;
+  padding: 20px 30px;
+}
 
-  .link {
-    display: inline-block;
-    position: relative;
-    width: fit-content;
-    text-decoration: none;
-    color:#476e89;
-  }
+.backLink {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
 
-  .link::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    transform: scaleX(0);
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background-color:#476e89;
-    transform-origin: bottom right;
-    transition: transform 0.25s ease-out;
-  }
-  
-  .link:hover::after {
-    transform: scaleX(1);
-    transform-origin: bottom left;
-  }
+.backLink .backArrow {
+  white-space: nowrap;
+  transition: transform 0.3s ease;
+}
+
+.backLink:hover .backArrow {
+  transform: translateX(-7px);
+}
+
+.backarrow {
+  font-size: 1.2em;
+}
+
+.backText {
+  white-space: nowrap;
+}
+
+.logo {
+  position: absolute;
+  top: 5px;
+  left: 15px;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: auto;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  min-height: 100vh;
+  max-width: 350px;
+  width: 100%;
+}
+
+.title {
+  color: #476e89;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #476e89;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.input::placeholder {
+  color: #aaa;
+}
+
+.button {
+  padding: 15px;
+  background-color: #476e89;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #3a5d76;
+}
+
+.link {
+  display: inline-block;
+  position: relative;
+  width: fit-content;
+  text-decoration: none;
+  color: #476e89;
+}
+
+.link::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #476e89;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.link:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}

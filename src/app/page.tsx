@@ -34,12 +34,29 @@ export default function Home() {
           <img src={Logo.src} alt="logo" className={styles.logo} />
         </div>
         <div className={styles.navbarEnd}>
-          <Link href="/pages/login" className={styles.card}>
-            <h2 className={styles.cardLink}>
-              <span className={styles.cardText}>Login</span>
-              <span className={styles.arrow}>-&gt;</span>
-            </h2>
-          </Link>
+          {!session ? (
+            <>
+              <Link href="/pages/login" className={`${styles.card} ${isScrolled ? styles.scrolled : ""}`}>
+                {" "}
+                <h2 className={styles.cardLink}>
+                  <span className={styles.cardText}>Login</span>
+                  <span className={styles.arrow}>-&gt;</span>
+                </h2>
+              </Link>
+            </>
+          ) : (
+            <>
+              <button
+                className={`${styles.logOut} ${isScrolled ? styles.scrolled : ""}`}
+                onClick={() => {
+                  signOut();
+                }}
+              >
+                {" "}
+                Logout
+              </button>
+            </>
+          )}
         </div>
       </div>
       <div className={styles.header}>
@@ -64,14 +81,6 @@ export default function Home() {
               </>
             ) : (
               <>
-                <button
-                  className={styles.card}
-                  onClick={() => {
-                    signOut();
-                  }}
-                >
-                  Logout
-                </button>
               </>
             )}
           </div>

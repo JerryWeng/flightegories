@@ -43,6 +43,12 @@ const Login = () => {
 
   return (
     <div className={styles.main}>
+      <Link href="/" className={styles.back}>
+        <h2 className={styles.backLink}>
+          <span className={styles.backArrow}>&lt;-</span>
+          <span className={styles.backText}>Back</span>
+        </h2>
+      </Link>
       <div className={styles.container}>
         <Link href="/">
           <img src={Logo.src} className={styles.logo} />
