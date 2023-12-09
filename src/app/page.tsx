@@ -5,6 +5,7 @@ import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 import Logo from "../public/images/logo.png";
 import styles from "./page.module.css";
+import Navbar from "@/components/Navbar/Navbar";
 
 export default function Home() {
   const { data: session }: any = useSession();
@@ -28,37 +29,7 @@ export default function Home() {
   return (
     <main className={styles.main}>
       {/* <div className={styles.block} /> */}
-      <div className={`${styles.navbar} ${isScrolled ? styles.scrolled : ""}`}>
-        {" "}
-        <div className={styles.navbarStart}>
-          <img src={Logo.src} alt="logo" className={styles.logo} />
-        </div>
-        <div className={styles.navbarEnd}>
-          {!session ? (
-            <>
-              <Link href="/pages/login" className={`${styles.card} ${isScrolled ? styles.scrolled : ""}`}>
-                {" "}
-                <h2 className={styles.cardLink}>
-                  <span className={styles.cardText}>Login</span>
-                  <span className={styles.arrow}>-&gt;</span>
-                </h2>
-              </Link>
-            </>
-          ) : (
-            <>
-              <button
-                className={`${styles.logOut} ${isScrolled ? styles.scrolled : ""}`}
-                onClick={() => {
-                  signOut();
-                }}
-              >
-                {" "}
-                Logout
-              </button>
-            </>
-          )}
-        </div>
-      </div>
+      <Navbar />
       <div className={styles.header}>
         <div className={styles.about}>
           <div className={styles.aboutContent}>
