@@ -1,8 +1,9 @@
 "use client"
 import { FC, useState } from 'react';
-import SearchableDropdown from '@/component/Dropdown/SearchableDropdown'; 
+import SearchableDropdown from '@/components/Dropdown/SearchableDropdown'; 
 import styles from './Reserve.module.css';
 import {TowerControl, CalendarDays, PlaneTakeoff, PlaneLanding} from 'lucide-react'
+import Navbar from '@/components/Navbar/Navbar';
 
 const Reserve: FC = () => {
   const [takeoffInput, setTakeoffInput] = useState('');
@@ -19,6 +20,7 @@ const Reserve: FC = () => {
 
   return (
     <div className={styles.container}>
+      <Navbar />
       <div className={styles.dropdownWithIcon}>
         <PlaneTakeoff className={styles.icon} />
         <SearchableDropdown items={items} placeholder="Takeoff date MM/DD/YYYY" onInputChange={setTakeoffInput}  />
