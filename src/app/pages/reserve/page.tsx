@@ -34,7 +34,7 @@ const Reserve: FC = () => {
       <div className={styles.dropdownWithIcon}>
         <TowerControl className={styles.icon} />
         <SearchableDropdown items={items} placeholder="Arrival airport" onInputChange={setArrivalAirport}/>
-        <button onClick={handleButtonClick}>Search</button>
+        <button className={styles.searchButton} onClick={handleButtonClick}>Search</button>
       </div>
     </div>
   );
