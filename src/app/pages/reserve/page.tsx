@@ -1,20 +1,41 @@
 "use client"
-import React from 'react';
-import Dropdown from '@/component/Dropdown/Dropdown';
+import { FC, useState } from 'react';
+import SearchableDropdown from '@/component/Dropdown/SearchableDropdown'; 
+import styles from './Reserve.module.css';
+import {TowerControl, CalendarDays, PlaneTakeoff, PlaneLanding} from 'lucide-react'
 
-const Reserve = () => {
-  //TODO: change datalist to be datalist that we want
-  const data = ['one', 'two', 'three', 'four'];
+const Reserve: FC = () => {
+  const [takeoffInput, setTakeoffInput] = useState('');
+  const [arrivalInput, setArrivalInput] = useState('');
+  const [departureAirport, setDepartureAirport] = useState('');
+  const [arrivalAirport, setArrivalAirport] = useState('');
 
-  const handleDropdownSelect = (selectedValue: string) => {
-    
-    console.log('Selected value:', selectedValue);
+  const handleButtonClick = () => {
+    const inputsArray = [takeoffInput, arrivalInput, departureAirport, arrivalAirport];
+    console.log(inputsArray);
   };
-  
+
+  const items = ['Apple', 'Banana', 'Cherry', 'Date', 'Elderberry'];
 
   return (
-    <div className='container'>
-      <Dropdown data={data} onSelect={handleDropdownSelect} />
+    <div className={styles.container}>
+      <div className={styles.dropdownWithIcon}>
+        <PlaneTakeoff className={styles.icon} />
+        <SearchableDropdown items={items} placeholder="Takeoff date MM/DD/YYYY" onInputChange={setTakeoffInput}  />
+      </div>
+      <div className={styles.dropdownWithIcon}>
+        <PlaneLanding className={styles.icon} />
+        <SearchableDropdown items={items} placeholder="Arrival date MM/DD/YYY" onInputChange={setArrivalInput}/>
+      </div>
+      <div className={styles.dropdownWithIcon}>
+        <TowerControl className={styles.icon} />
+        <SearchableDropdown items={items} placeholder="Departure airport" onInputChange={setDepartureAirport} />
+      </div>
+      <div className={styles.dropdownWithIcon}>
+        <TowerControl className={styles.icon} />
+        <SearchableDropdown items={items} placeholder="Arrival airport" onInputChange={setArrivalAirport}/>
+        <button onClick={handleButtonClick}>Search</button>
+      </div>
     </div>
   );
 };
