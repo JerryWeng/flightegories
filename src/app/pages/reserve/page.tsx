@@ -1,15 +1,20 @@
 "use client"
-import { FC, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
 import SearchableDropdown from '@/components/Dropdown/SearchableDropdown'; 
 import styles from './Reserve.module.css';
 import {TowerControl, CalendarDays, PlaneTakeoff, PlaneLanding} from 'lucide-react'
 import Navbar from '@/components/Navbar/Navbar';
+
 
 const Reserve: FC = () => {
   const [takeoffInput, setTakeoffInput] = useState('');
   const [arrivalInput, setArrivalInput] = useState('');
   const [departureAirport, setDepartureAirport] = useState('');
   const [arrivalAirport, setArrivalAirport] = useState('');
+  const [flights, setFlights] = useState([]);
+
+
+
 
   const handleButtonClick = () => {
     const inputsArray = [takeoffInput, arrivalInput, departureAirport, arrivalAirport];
