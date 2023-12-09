@@ -1,9 +1,9 @@
 import { useState, FC } from 'react';
-import styles from './SearchableDropdown.module.css'; // Adjust the import path
+import styles from './SearchableDropdown.module.css'; 
 import { SearchableDropdownProps } from '@/types/types';
 
 
-const SearchableDropdown: FC<SearchableDropdownProps> = ({ items, placeholder }) => {
+const SearchableDropdown: FC<SearchableDropdownProps> = ({ items, placeholder, onInputChange }) => {
   const [search, setSearch] = useState<string>('');
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -11,19 +11,22 @@ const SearchableDropdown: FC<SearchableDropdownProps> = ({ items, placeholder })
     item.toLowerCase().includes(search.toLowerCase())
   );
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    setSearch(newValue);
+    onInputChange(newValue); 
+  };
+
   return (
     <div className={styles.dropdownContainer}>
       <input
         className={styles.dropdownInput}
         type="text"
         value={search}
-        onChange={(e) => {
-          setSearch(e.target.value);
-               
-        }}
+        onChange={handleInputChange} 
         onFocus={() => setIsOpen(true)}
         onBlur={() => setTimeout(() => setIsOpen(false), 150)}
-        placeholder={placeholder} // Use the placeholder prop here
+        placeholder={placeholder}
       />
       {isOpen && filteredItems.length > 0 && (
         <ul className={styles.dropdownList}>
@@ -34,6 +37,7 @@ const SearchableDropdown: FC<SearchableDropdownProps> = ({ items, placeholder })
               onClick={() => {
                 setSearch(item);
                 setIsOpen(false);
+                onInputChange(item);
               }}
             >
               {item}
@@ -44,5 +48,6 @@ const SearchableDropdown: FC<SearchableDropdownProps> = ({ items, placeholder })
     </div>
   );
 };
+
 
 export default SearchableDropdown;
