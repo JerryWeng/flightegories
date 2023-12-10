@@ -47,7 +47,7 @@
     color: black;
   }
 
-.container {
+.filterContainer {
   padding: 20px;
   display: flex;
   flex-direction: row;
@@ -55,7 +55,6 @@
   justify-content: center;
   flex-wrap: wrap;
   width: 100vw;
-  height: 100vh;
 }
 
 .dropdownWithIcon {
@@ -87,4 +86,10 @@
 .searchButton:hover {
   background-color: #333; 
   color: #f8f8f8; 
+}
+
+.tableContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

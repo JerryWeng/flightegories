@@ -3,7 +3,8 @@ import React, { FC, useEffect, useState } from "react";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import SearchableDropdown from "@/component/Dropdown/SearchableDropdown";
-import styles from "./Reserve.module.css";
+import Table from "@/component/Table/AirportTable";
+import styles from "./reserve.module.css";
 import Logo from "../../../public/images/logo.png";
 import {
   TowerControl,
@@ -90,7 +91,7 @@ const Reserve: FC = () => {
           )}
         </div>
       </div>
-      <div className={styles.container}>
+      <div className={styles.filterContainer}>
         <div className={styles.dropdownWithIcon}>
           <PlaneTakeoff className={styles.icon} />
           <SearchableDropdown
@@ -127,6 +128,7 @@ const Reserve: FC = () => {
           </button>
         </div>
       </div>
+      <Table/>
     </main>
   );
 };

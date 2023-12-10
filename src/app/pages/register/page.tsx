@@ -105,7 +105,7 @@ const Register = () => {
           </button>
           <p>{error && error}</p>
         </form>
-        <Link className={styles.link} href="/login">
+        <Link className={styles.link} href="/pages/login">
           Already have an account?
         </Link>
       </div>
