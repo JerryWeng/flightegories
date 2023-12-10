@@ -3,7 +3,7 @@ import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 import { sql } from "@vercel/postgres"
 
-export const OPTIONS: any = {
+export const authOptions: any = {
     session: {
         strategy: 'jwt',
     },
@@ -34,5 +34,5 @@ export const OPTIONS: any = {
     ],
 };
 
-export const handler = NextAuth(OPTIONS);
+export const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
