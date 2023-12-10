@@ -1,21 +1,36 @@
-"use client"
-import React, { useEffect, useState } from "react";
+"use client";
+import React, { FC, useEffect, useState } from "react";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import Dropdown from '@/component/Dropdown/Dropdown';
+import SearchableDropdown from "@/component/Dropdown/SearchableDropdown";
+import styles from "./Reserve.module.css";
 import Logo from "../../../public/images/logo.png";
-import styles from "./reserve.module.css";
+import {
+  TowerControl,
+  CalendarDays,
+  PlaneTakeoff,
+  PlaneLanding,
+} from "lucide-react";
 
-const Reserve = () => {
-  //TODO: change datalist to be datalist that we want
+const Reserve: FC = () => {
+  const [takeoffInput, setTakeoffInput] = useState("");
+  const [arrivalInput, setArrivalInput] = useState("");
+  const [departureAirport, setDepartureAirport] = useState("");
+  const [arrivalAirport, setArrivalAirport] = useState("");
   const { data: session }: any = useSession();
-  const items = ['one', 'two', 'three', 'four'];
   const [isScrolled, setIsScrolled] = useState(false);
 
-  const handleDropdownSelect = (selectedValue: string) => {
-    
-    console.log('Selected value:', selectedValue);
+  const handleButtonClick = () => {
+    const inputsArray = [
+      takeoffInput,
+      arrivalInput,
+      departureAirport,
+      arrivalAirport,
+    ];
+    console.log(inputsArray);
   };
+
+  const items = ["Apple", "Banana", "Cherry", "Date", "Elderberry"];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,21 +46,26 @@ const Reserve = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-  
+
   return (
     <main>
-        <div className={styles.block} />
-        <div className={`${styles.navbar} ${isScrolled ? styles.scrolled : ""}`}>
+      <div className={styles.block} />
+      <div className={`${styles.navbar} ${isScrolled ? styles.scrolled : ""}`}>
         {" "}
         <div className={styles.navbarStart}>
-            <Link href="/">
-                <img src={Logo.src} alt="logo" className={styles.logo} />
-            </Link>
+          <Link href="/">
+            <img src={Logo.src} alt="logo" className={styles.logo} />
+          </Link>
         </div>
         <div className={styles.navbarEnd}>
           {!session ? (
             <>
-              <Link href="/pages/login" className={`${styles.card} ${isScrolled ? styles.scrolled : ""}`}>
+              <Link
+                href="/pages/login"
+                className={`${styles.card} ${
+                  isScrolled ? styles.scrolled : ""
+                }`}
+              >
                 {" "}
                 <h2 className={styles.cardLink}>
                   <span className={styles.cardText}>Login</span>
@@ -56,7 +76,9 @@ const Reserve = () => {
           ) : (
             <>
               <button
-                className={`${styles.logOut} ${isScrolled ? styles.scrolled : ""}`}
+                className={`${styles.logOut} ${
+                  isScrolled ? styles.scrolled : ""
+                }`}
                 onClick={() => {
                   signOut();
                 }}
@@ -68,9 +90,43 @@ const Reserve = () => {
           )}
         </div>
       </div>
-      <div className='container'>
-        <Dropdown data={items} onSelect={handleDropdownSelect} />
-    </div>
+      <div className={styles.container}>
+        <div className={styles.dropdownWithIcon}>
+          <PlaneTakeoff className={styles.icon} />
+          <SearchableDropdown
+            items={items}
+            placeholder="Takeoff date MM/DD/YYYY"
+            onInputChange={setTakeoffInput}
+          />
+        </div>
+        <div className={styles.dropdownWithIcon}>
+          <PlaneLanding className={styles.icon} />
+          <SearchableDropdown
+            items={items}
+            placeholder="Arrival date MM/DD/YYY"
+            onInputChange={setArrivalInput}
+          />
+        </div>
+        <div className={styles.dropdownWithIcon}>
+          <TowerControl className={styles.icon} />
+          <SearchableDropdown
+            items={items}
+            placeholder="Departure airport"
+            onInputChange={setDepartureAirport}
+          />
+        </div>
+        <div className={styles.dropdownWithIcon}>
+          <TowerControl className={styles.icon} />
+          <SearchableDropdown
+            items={items}
+            placeholder="Arrival airport"
+            onInputChange={setArrivalAirport}
+          />
+          <button className={styles.searchButton} onClick={handleButtonClick}>
+            Search
+          </button>
+        </div>
+      </div>
     </main>
   );
 };
