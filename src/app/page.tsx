@@ -27,7 +27,7 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      {/* <div className={styles.block} /> */}
+      <div className={styles.block} />
       <div className={`${styles.navbar} ${isScrolled ? styles.scrolled : ""}`}>
         {" "}
         <div className={styles.navbarStart}>
@@ -92,8 +92,6 @@ export default function Home() {
           <h1>Your Flight Now!</h1>
           <a
             href="/pages/reserve"
-            target="_blank"
-            rel="noopener noreferrer"
             className={styles.reserveLink}
           >
             Reserve Flight

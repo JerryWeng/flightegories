@@ -11,7 +11,8 @@
 }
 
 .block {
-  height: 70px;
+  background-color: black;
+  height: 30px;
 }
 
 .navbar {
