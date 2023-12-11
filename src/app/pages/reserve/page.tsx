@@ -109,9 +109,7 @@ const Reserve: FC = () => {
       fetchResults();
     }, [])
     
-    useEffect(() => {
-      console.log(flights)
-    }, [flights])
+    
     
 
 

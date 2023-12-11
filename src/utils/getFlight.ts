@@ -10,7 +10,7 @@ export default async function fetchFlights(takeoffInput: string, arrivalInput: s
           arrivalAirport,
       });
 
-      const data = await sql`SELECT * FROM flights WHERE departure_airport = ${departureAirport} AND arrival_airport = ${arrivalAirport} AND departure_time LIKE ${takeoffInput} AND arrival_time LIKE ${arrivalInput}`
+      const data = await sql`SELECT * FROM flights WHERE departure_airport = '${departureAirport}' AND arrival_airport = '${arrivalAirport}' AND departure_time LIKE '${takeoffInput}%' AND arrival_time LIKE '${arrivalInput}'%;`;
      
       return data.rows;
   } catch (error) {
