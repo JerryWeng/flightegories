@@ -31,7 +31,24 @@ const Reserve: FC = () => {
     console.log(inputsArray);
   };
 
-  const items = ["Apple", "Banana", "Cherry", "Date", "Elderberry"];
+  var airportItems: string[] = [];
+  var departItems: string[] = [];
+  var arrivalItems: string[] = [];
+  const airportData = async () => {
+    try {
+      const res = await fetch("../api/fetch-data");
+      if (res.status === 200) {
+        const resJSON = await res.json();
+        for (var i = 0; i < resJSON.airportData.rows.length; i++) {
+          airportItems[i] =  resJSON.airportData.rows[i].airportname;
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  airportData();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -95,7 +112,7 @@ const Reserve: FC = () => {
         <div className={styles.dropdownWithIcon}>
           <PlaneTakeoff className={styles.icon} />
           <SearchableDropdown
-            items={items}
+            items={departItems}
             placeholder="Takeoff date MM/DD/YYYY"
             onInputChange={setTakeoffInput}
           />
@@ -103,7 +120,7 @@ const Reserve: FC = () => {
         <div className={styles.dropdownWithIcon}>
           <PlaneLanding className={styles.icon} />
           <SearchableDropdown
-            items={items}
+            items={arrivalItems}
             placeholder="Arrival date MM/DD/YYY"
             onInputChange={setArrivalInput}
           />
@@ -111,7 +128,7 @@ const Reserve: FC = () => {
         <div className={styles.dropdownWithIcon}>
           <TowerControl className={styles.icon} />
           <SearchableDropdown
-            items={items}
+            items={airportItems}
             placeholder="Departure airport"
             onInputChange={setDepartureAirport}
           />
@@ -119,7 +136,7 @@ const Reserve: FC = () => {
         <div className={styles.dropdownWithIcon}>
           <TowerControl className={styles.icon} />
           <SearchableDropdown
-            items={items}
+            items={airportItems}
             placeholder="Arrival airport"
             onInputChange={setArrivalAirport}
           />
