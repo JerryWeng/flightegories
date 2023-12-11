@@ -19,8 +19,8 @@ const AirportTable: FC<AirportTableProps> = ({ flights }) => {
           </tr>
         </thead>
         <tbody>
-          {flights.map((flight) => (
-            <tr key={flight.from + flight.to + flight.departure}>
+          {flights.map((flight, index) => (
+            <tr key={index}>
               <td>{flight.from}</td>
               <td>{flight.to}</td>
               <td>{flight.departure}</td>

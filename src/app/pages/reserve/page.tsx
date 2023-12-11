@@ -13,6 +13,7 @@ import {
   PlaneLanding,
 } from "lucide-react";
 import { Flight, FlightData } from "@/types/types";
+import fetchFlights from "@/utils/getFlight";
 
 const Reserve: FC = () => {
   const [takeoffInput, setTakeoffInput] = useState("");
@@ -26,14 +27,14 @@ const Reserve: FC = () => {
   var departItems: string[] = [];
   var arrivalItems: string[] = [];
 
-  const handleButtonClick = () => {
-    const inputsArray = [
-      takeoffInput,
-      arrivalInput,
-      departureAirport,
-      arrivalAirport,
-    ];
-    console.log(inputsArray);
+  const handleButtonClick = async () => {
+    try {
+      const fetchedFlights = await fetchFlights(takeoffInput, arrivalInput, departureAirport, arrivalAirport);
+      setFlights(fetchedFlights); 
+      console.log(fetchedFlights);
+    } catch (error) {
+      console.error('Error fetching flights:', error);
+    }
   };
 
   const transformFlightsData = (flights: Flight[]): FlightData[] => {
@@ -45,6 +46,9 @@ const Reserve: FC = () => {
       airports: `${flight.departure_airport} - ${flight.arrival_airport}`,
     }));
   };
+
+
+  
 
   
   const fetchData = async () => {
@@ -174,7 +178,7 @@ const Reserve: FC = () => {
           <PlaneTakeoff className={styles.icon} />
           <SearchableDropdown
             items={departItems}
-            placeholder="Takeoff date MM/DD/YYYY"
+            placeholder="Takeoff date"
             onInputChange={setTakeoffInput}
           />
         </div>
@@ -182,7 +186,7 @@ const Reserve: FC = () => {
           <PlaneLanding className={styles.icon} />
           <SearchableDropdown
             items={arrivalItems}
-            placeholder="Arrival date MM/DD/YYY"
+            placeholder="Arrival date"
             onInputChange={setArrivalInput}
           />
         </div>
