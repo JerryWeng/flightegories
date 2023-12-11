@@ -34,13 +34,29 @@ const Reserve: FC = () => {
   var airportItems: string[] = [];
   var departItems: string[] = [];
   var arrivalItems: string[] = [];
-  const airportData = async () => {
+  const fetchData = async () => {
     try {
       const res = await fetch("../api/fetch-data");
       if (res.status === 200) {
         const resJSON = await res.json();
         for (var i = 0; i < resJSON.airportData.rows.length; i++) {
-          airportItems[i] =  resJSON.airportData.rows[i].airportname;
+          airportItems[i] = resJSON.airportData.rows[i].airportname;
+        }
+
+        var j = 0;
+        for (var k = 0; k < resJSON.departureTimeData.rows.length; k++) {
+          if (!departItems.includes(resJSON.departureTimeData.rows[k].departure_time.substring(0, 10))) {
+            departItems[j] = resJSON.departureTimeData.rows[k].departure_time.substring(0, 10);
+            j++;
+          }
+        }
+
+        j = 0;
+        for (var l = 0; l < resJSON.arrivalTimeData.rows.length; l++) {
+          if (!arrivalItems.includes(resJSON.arrivalTimeData.rows[l].arrival_time.substring(0, 10))) {
+            arrivalItems[j] = resJSON.arrivalTimeData.rows[l].arrival_time.substring(0, 10);
+            j++;
+          }
         }
       }
     } catch (error) {
@@ -48,7 +64,7 @@ const Reserve: FC = () => {
     }
   };
 
-  airportData();
+  fetchData();
 
   useEffect(() => {
     const handleScroll = () => {
