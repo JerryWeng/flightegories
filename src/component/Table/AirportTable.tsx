@@ -1,51 +1,10 @@
-import { useState, FC } from "react";
+import React, { FC } from "react";
 import styles from "./AirportTable.module.css";
+import { AirportTableProps } from "@/types/types";
 
-interface Airport {
-  id: number;
-  from: string;
-  to: string;
-  departure: string;
-  arrival: string;
-  airports: string;
-}
 
-const AirportTable = () => {
-  const [data, setData] = useState<Airport[]>([
-    {
-      id: 1,
-      from: "A",
-      to: "B",
-      departure: "10:00",
-      arrival: "12:00",
-      airports: "AB",
-    },
-    {
-      id: 2,
-      from: "C",
-      to: "D",
-      departure: "10:00",
-      arrival: "12:00",
-      airports: "AB",
-    },
-    {
-      id: 3,
-      from: "E",
-      to: "F",
-      departure: "10:00",
-      arrival: "12:00",
-      airports: "AB",
-    },
-    {
-      id: 4,
-      from: "B",
-      to: "A",
-      departure: "10:00",
-      arrival: "12:00",
-      airports: "AB",
-    },
-  ]);
 
+const AirportTable: FC<AirportTableProps> = ({ flights }) => {
   return (
     <div className={styles.airportTableContainer}>
       <table className={styles.airportTable}>
@@ -60,13 +19,13 @@ const AirportTable = () => {
           </tr>
         </thead>
         <tbody>
-          {data.map((airport) => (
-            <tr key={airport.id}>
-              <td>{airport.from}</td>
-              <td>{airport.to}</td>
-              <td>{airport.departure}</td>
-              <td>{airport.arrival}</td>
-              <td>{airport.airports}</td>
+          {flights.map((flight) => (
+            <tr key={flight.from + flight.to + flight.departure}>
+              <td>{flight.from}</td>
+              <td>{flight.to}</td>
+              <td>{flight.departure}</td>
+              <td>{flight.arrival}</td>
+              <td>{`${flight.from} - ${flight.to}`}</td>
               <td>
                 <button>Reserve</button>
               </td>

@@ -12,14 +12,19 @@ import {
   PlaneTakeoff,
   PlaneLanding,
 } from "lucide-react";
+import { Flight, FlightData } from "@/types/types";
 
 const Reserve: FC = () => {
   const [takeoffInput, setTakeoffInput] = useState("");
   const [arrivalInput, setArrivalInput] = useState("");
   const [departureAirport, setDepartureAirport] = useState("");
   const [arrivalAirport, setArrivalAirport] = useState("");
+  const [flights, setFlights] = useState<Flight[]>([]);
   const { data: session }: any = useSession();
   const [isScrolled, setIsScrolled] = useState(false);
+  var airportItems: string[] = [];
+  var departItems: string[] = [];
+  var arrivalItems: string[] = [];
 
   const handleButtonClick = () => {
     const inputsArray = [
@@ -31,9 +36,17 @@ const Reserve: FC = () => {
     console.log(inputsArray);
   };
 
-  var airportItems: string[] = [];
-  var departItems: string[] = [];
-  var arrivalItems: string[] = [];
+  const transformFlightsData = (flights: Flight[]): FlightData[] => {
+    return flights.map(flight => ({
+      from: flight.departure_airport, 
+      to: flight.arrival_airport,     
+      departure: flight.departure_time, 
+      arrival: flight.arrival_time,     
+      airports: `${flight.departure_airport} - ${flight.arrival_airport}`,
+    }));
+  };
+
+  
   const fetchData = async () => {
     try {
       const res = await fetch("../api/fetch-data");
@@ -65,6 +78,38 @@ const Reserve: FC = () => {
   };
 
   fetchData();
+
+  const fetchResults = async () => {
+    try {
+        
+        const params = new URLSearchParams({
+            takeoffDate: takeoffInput,
+            arrivalDate: arrivalInput,
+            departureAirport: departureAirport,
+            arrivalAirport: arrivalAirport
+        });
+
+        
+        const response = await fetch(`../api/fetch-request`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        setFlights(data);
+    } catch (error) {
+        console.error('Fetching error:', error);
+    }
+};
+
+    useEffect(() => {
+      fetchResults();
+    }, [])
+    
+    useEffect(() => {
+      console.log(flights)
+    }, [flights])
+    
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -161,7 +206,7 @@ const Reserve: FC = () => {
           </button>
         </div>
       </div>
-      <Table/>
+      <Table flights={transformFlightsData(flights)}/>
     </main>
   );
 };
